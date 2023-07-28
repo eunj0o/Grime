@@ -35,150 +35,67 @@
         tools:ignore="SpeakableTextPresentCheck"/>
 
     <ImageButton
-        android:id="@+id/whiteColor"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/white"
-        tools:ignore="SpeakableTextPresentCheck"/>
-
-    <ImageButton
-        android:id="@+id/redColor"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/whiteColor"
-        app:srcCompat="@drawable/red"
-        tools:ignore="SpeakableTextPresentCheck"/>
-
-    <ImageButton
-        android:id="@+id/orangeColor"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/redColor"
-        app:srcCompat="@drawable/orange"
-        tools:ignore="SpeakableTextPresentCheck"/>
-
-    <ImageButton
-        android:id="@+id/imageButton5"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/orangeColor"
-        app:srcCompat="@drawable/yellow"
-        tools:ignore="SpeakableTextPresentCheck"/>
-
-    <ImageButton
-        android:id="@+id/greenColor"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5"
-        app:srcCompat="@drawable/green"
-        tools:ignore="SpeakableTextPresentCheck"/>
-
-    <ImageButton
-        android:id="@+id/blueColor"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/greenColor"
-        app:srcCompat="@drawable/blue"
-        tools:ignore="SpeakableTextPresentCheck"/>
-
-    <ImageButton
-        android:id="@+id/purpleColor"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/blueColor"
-        app:srcCompat="@drawable/purple"
-        tools:ignore="SpeakableTextPresentCheck"/>
-
-    <ImageButton
-        android:id="@+id/blackColor"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/purpleColor"
-        app:srcCompat="@drawable/black"
-        tools:ignore="SpeakableTextPresentCheck"/>
-
-    <ImageButton
         android:id="@+id/pen"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/whiteColor"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paint"
         app:srcCompat="@drawable/pen"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/eraser"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/redColor"
         app:layout_constraintStart_toEndOf="@+id/pen"
+        app:layout_constraintTop_toBottomOf="@+id/paint"
         app:srcCompat="@drawable/eraser"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/undo"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/orangeColor"
         app:layout_constraintStart_toEndOf="@+id/eraser"
+        app:layout_constraintTop_toBottomOf="@+id/paint"
         app:srcCompat="@drawable/undo"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/redo"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton5"
         app:layout_constraintStart_toEndOf="@+id/undo"
+        app:layout_constraintTop_toBottomOf="@+id/paint"
         app:srcCompat="@drawable/redo"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/completeButton"
         android:layout_width="120dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
         android:backgroundTint="#FDFFB1"
         android:text="그리기 완료"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/blueColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/redo"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        app:layout_constraintTop_toBottomOf="@+id/paint"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

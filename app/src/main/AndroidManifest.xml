@@ -16,6 +16,13 @@
             android:name=".Painting"
             android:exported="false" />
         <activity
+            android:name=".PenActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
+        <activity
+            android:name=".PaintingActivity"
+            android:exported="false" />
+        <activity
             android:name=".PaintingDiary"
             android:exported="false" />
         <activity
