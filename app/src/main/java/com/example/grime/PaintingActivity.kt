@@ -18,11 +18,21 @@ import java.util.LinkedList
 class PaintingView(context: Context) : View(context) {
     var paint : Paint = Paint()
     var path : Path = Path()
-    var paths : LinkedList<Path> = LinkedList<Path>()
-    var undoPaths : LinkedList<Path> = LinkedList<Path>()
+    var lines : LinkedList<Line> = LinkedList<Line>()
+    var undoLines : LinkedList<Line> = LinkedList<Line>()
+
+    class Line {
+        var path : Path = Path()
+        var paint : Paint = Paint()
+
+        constructor(path: Path, paint : Paint) {
+            this.path = path
+            this.paint = paint
+        }
+    }
 
     init {
-        paint.setColor(Color.RED);
+        paint.setColor(Color.BLACK);
         paint.setAntiAlias(true);
         paint.setStrokeWidth(10f);
         paint.setStyle(Paint.Style.STROKE);
@@ -33,8 +43,8 @@ class PaintingView(context: Context) : View(context) {
     }
 
     override fun onDraw(canvas: Canvas) {
-        for(p in paths) {
-            canvas.drawPath(p, paint)
+        for(l in lines) {
+            canvas.drawPath(l.path, l.paint)
         }
         canvas.drawPath(path, paint)
     }
@@ -44,15 +54,24 @@ class PaintingView(context: Context) : View(context) {
         val y = event.y.toFloat()
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                undoPaths.clear()
+                undoLines.clear()
                 path.reset()
                 path.moveTo(x, y)
             }
 
             MotionEvent.ACTION_MOVE -> path.lineTo(x, y)
             MotionEvent.ACTION_UP -> {
-                paths.add(path)
+                lines.add(Line(path, paint))
                 path = Path()
+                val color = paint.color
+                val antiAlias = paint.isAntiAlias
+                val width = paint.strokeWidth
+                val style = paint.style
+                paint = Paint()
+                paint.setColor(color)
+                paint.setAntiAlias(antiAlias)
+                paint.setStrokeWidth(width)
+                paint.setStyle(style)
             }
         }
         this.invalidate()
@@ -60,15 +79,15 @@ class PaintingView(context: Context) : View(context) {
     }
 
     fun undo() {
-        if (paths.isNotEmpty()) {
-            undoPaths.add(paths.removeLast())
+        if (lines.isNotEmpty()) {
+            undoLines.add(lines.removeLast())
             invalidate()
         }
     }
 
     fun redo() {
-        if (undoPaths.isNotEmpty()) {
-            paths.add(undoPaths.removeLast())
+        if (undoLines.isNotEmpty()) {
+            lines.add(undoLines.removeLast())
             invalidate()
         }
     }
