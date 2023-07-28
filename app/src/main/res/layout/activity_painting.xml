@@ -118,7 +118,7 @@
         tools:ignore="SpeakableTextPresentCheck"/>
 
     <ImageButton
-        android:id="@+id/penButton"
+        android:id="@+id/pen"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="32dp"
@@ -130,38 +130,38 @@
         tools:ignore="SpeakableTextPresentCheck"/>
 
     <ImageButton
-        android:id="@+id/eraserButton"
+        android:id="@+id/eraser"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="#00FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/redColor"
-        app:layout_constraintStart_toEndOf="@+id/penButton"
+        app:layout_constraintStart_toEndOf="@+id/pen"
         app:srcCompat="@drawable/eraser"
         tools:ignore="SpeakableTextPresentCheck"/>
 
     <ImageButton
-        android:id="@+id/undoButton"
+        android:id="@+id/undo"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="#00FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/orangeColor"
-        app:layout_constraintStart_toEndOf="@+id/eraserButton"
+        app:layout_constraintStart_toEndOf="@+id/eraser"
         app:srcCompat="@drawable/undo"
         tools:ignore="SpeakableTextPresentCheck"/>
 
     <ImageButton
-        android:id="@+id/redoButton"
+        android:id="@+id/redo"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="#00FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/imageButton5"
-        app:layout_constraintStart_toEndOf="@+id/undoButton"
+        app:layout_constraintStart_toEndOf="@+id/undo"
         app:srcCompat="@drawable/redo"
         tools:ignore="SpeakableTextPresentCheck"/>
 
@@ -177,7 +177,8 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/blueColor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/redoButton"
+        app:layout_constraintStart_toEndOf="@+id/redo"
         tools:ignore="SpeakableTextPresentCheck"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
