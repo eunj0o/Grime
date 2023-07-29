@@ -23,13 +23,13 @@
         android:id="@+id/fontchangeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/kopubworlddotummedium"
         android:text="폰트 변경"
         android:textColor="#000000"
         android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/fontchangeback"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
@@ -96,12 +96,13 @@
         android:id="@+id/font3Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
+        android:layout_marginStart="84dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
         android:text="나눔손글씨 잘하고있어"
         app:layout_constraintBottom_toBottomOf="@+id/font3Button"
         app:layout_constraintStart_toStartOf="@+id/font3Button"
-        app:layout_constraintTop_toTopOf="@+id/font3Button" />
+        app:layout_constraintTop_toTopOf="@+id/font3Button"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
