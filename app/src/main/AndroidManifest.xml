@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Grime"
         tools:targetApi="31">
         <activity
+            android:name=".EmptyDiaryActivity"
+            android:exported="false" />
+        <activity
             android:name=".Painting"
             android:exported="false" />
         <activity
@@ -23,7 +26,7 @@
             android:name=".PaintingActivity"
             android:exported="false" />
         <activity
-            android:name=".PaintingDiary"
+            android:name=".PaintingDiaryActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
