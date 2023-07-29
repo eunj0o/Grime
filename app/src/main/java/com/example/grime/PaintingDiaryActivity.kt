@@ -1,0 +1,35 @@
+package com.example.grime
+
+import android.annotation.SuppressLint
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.LinearLayout
+import android.widget.TextView
+
+class PaintingDiaryActivity : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_painting_diary)
+
+        val intent = intent
+
+        var diaryDate = findViewById<TextView>(R.id.diaryDate)
+        var paint = findViewById<LinearLayout>(R.id.paint)
+
+        var year = intent.getIntExtra("year", 0).toString()
+        var month = intent.getIntExtra("month", 0).toString()
+        var date = intent.getIntExtra("date", 0).toString()
+
+
+        diaryDate.setText(year + "년 " + month + "월 " + date + "일")
+
+
+        paint.setOnClickListener {
+            val intent = Intent(this, PaintingActivity::class.java)
+            startActivity(intent)
+        }
+
+    }
+}
