@@ -229,6 +229,18 @@ class PaintingView(context: Context, fileDir: String) : View(context) {
         penPaint.setStrokeWidth(width)
         paint.strokeWidth = width
     }
+
+    fun isEraser() : Boolean {
+        return mode == Mode.ERASER
+    }
+
+    fun isPen() : Boolean {
+        return mode == Mode.PEN
+    }
+
+    fun isMove() : Boolean {
+        return mode == Mode.MOVE
+    }
 }
 lateinit var view : PaintingView
 
@@ -255,13 +267,23 @@ class PaintingActivity : AppCompatActivity() {
         undoButton.setOnClickListener { view.undo() }
         redoButton.setOnClickListener { view.redo() }
         penButton.setOnClickListener {
-            val intent = Intent(this, PenActivity::class.java)
-            intent.putExtra("color", view.getPenColor());
-            intent.putExtra("width", view.getPenWidth());
-            startActivityForResult(intent, 1)
+            if(view.isPen()) {
+                val intent = Intent(this, PenActivity::class.java)
+                intent.putExtra("color", view.getPenColor());
+                intent.putExtra("width", view.getPenWidth());
+                startActivityForResult(intent, 1)
+            }
+            else
+                view.setPenMode()
         }
         eraserButton.setOnClickListener {
-            view.setEraserMode()
+            if(view.isEraser()) {
+                val intent = Intent(this, EraserActivity::class.java)
+                intent.putExtra("size", view.eraserSize);
+                startActivityForResult(intent, 2)
+            }
+            else
+                view.setEraserMode()
         }
 
         completeButton.setOnClickListener {
@@ -299,9 +321,10 @@ class PaintingActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                // 데이터 받기
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+
+            // 데이터 받기
                 val color = data?.getIntExtra("color", view.getPenColor())
                 val width = data?.getFloatExtra("width", view.getPenWidth())
 
@@ -312,7 +335,13 @@ class PaintingActivity : AppCompatActivity() {
                     view.setPenWidth(width)
                 }
             }
+            else if (requestCode == 2) {
+                val size = data?.getFloatExtra("size", view.eraserSize)
+
+                if (size != null) {
+                    view.eraserSize = size
+                }
+            }
         }
     }
-
 }

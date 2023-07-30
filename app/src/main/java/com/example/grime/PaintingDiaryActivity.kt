@@ -53,7 +53,6 @@ class PaintingDiaryActivity : AppCompatActivity() {
                 val fileName = year + "_" + month + "_" + date + ".png"
                 val bitmap = BitmapFactory.decodeFile(cacheDir.path + "/" + fileName)
                 paint.setImageBitmap(bitmap)
-                Log.i("test", fileName + " success load")
             }
         }
     }

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Grime"
         tools:targetApi="31">
         <activity
+            android:name=".EraserActivity"
+            android:exported="false" />
+        <activity
             android:name=".EmptyDiaryActivity"
             android:exported="false" />
         <activity
