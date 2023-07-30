@@ -5,11 +5,16 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import java.io.BufferedReader
 import java.io.File
+import java.io.FileReader
+import java.lang.Exception
+import java.nio.Buffer
 
 
 class PaintingDiaryActivity : AppCompatActivity() {
@@ -18,6 +23,7 @@ class PaintingDiaryActivity : AppCompatActivity() {
     lateinit var month : String
     lateinit var date : String
     lateinit var paint : ImageView
+    lateinit var mindButton : ImageButton
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +35,7 @@ class PaintingDiaryActivity : AppCompatActivity() {
         var diaryDate = findViewById<TextView>(R.id.diaryDate)
         paint = findViewById<ImageView>(R.id.paint)
         var writingTextView = findViewById<TextView>(R.id.writeTextView)
+        mindButton = findViewById(R.id.mindButton)
 
         year = intent.getIntExtra("year", 0).toString()
         month = intent.getIntExtra("month", 0).toString()
@@ -47,6 +54,10 @@ class PaintingDiaryActivity : AppCompatActivity() {
         writingTextView.setOnClickListener {
             val intent = Intent(this, WritingActivity::class.java)
             intent.putExtra("file", year + "_" + month + "_" + date + "_content" + ".txt");
+        }
+        mindButton.setOnClickListener {
+            val intent = Intent(this, MindActivity::class.java)
+            intent.putExtra("file", year + "_" + month + "_" + date + "_mind" + ".txt");
             startActivityForResult(intent, 2)
         }
 
@@ -54,12 +65,40 @@ class PaintingDiaryActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                // 데이터 받기
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1) {
                 val fileName = year + "_" + month + "_" + date + ".png"
                 val bitmap = BitmapFactory.decodeFile(cacheDir.path + "/" + fileName)
                 paint.setImageBitmap(bitmap)
+            }
+            else if(requestCode == 2) {
+                val fileName = year + "_" + month + "_" + date + "_mind" + ".txt"
+                var mind = ""
+
+                try {
+                    val buffer = BufferedReader(FileReader(cacheDir.path + "/" + fileName))
+                    while (true) {
+                        val line = buffer.readLine()
+                        if(line == null)
+                            break
+                        else
+                            mind += line
+                    }
+                } catch(e : Exception) {
+                    Log.e("error", "error: " +  e.message)
+                } finally {
+                    Log.i("test", "기분: " + mind)
+                    if(mind == "angry")
+                        mindButton.setImageResource(R.drawable.angry)
+                    else if(mind == "sad")
+                        mindButton.setImageResource(R.drawable.sad)
+                    else if(mind == "happy")
+                        mindButton.setImageResource(R.drawable.happy)
+                    else if(mind == "soso")
+                        mindButton.setImageResource(R.drawable.soso)
+                    else if(mind == "delight")
+                        mindButton.setImageResource(R.drawable.delight)
+                }
             }
         }
     }

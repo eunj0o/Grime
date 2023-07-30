@@ -1,177 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#DDF0F6"
     tools:context=".PaintingDiary">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#00FFFFFF"
+        app:srcCompat="@drawable/back"
+        tools:ignore="SpeakableTextPresentCheck" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/diaryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="2023년 7월 1일"
+ />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    <ImageButton
+        android:id="@+id/menuButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#00FFFFFF"
+        app:srcCompat="@drawable/menu"
+        tools:ignore="SpeakableTextPresentCheck"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kopubworlddotummedium"
+            android:text="제목"
+            android:paddingRight="10dp"
+            android:textSize="16sp" />
 
+        <EditText
+            android:id="@+id/titleEdit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:enabled="false"
+            android:fontFamily="@font/nanumjunghaksaeng"
+            android:inputType="text"
+            android:textSize="16sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+    <TextView
+        android:id="@+id/mindText"
+        android:layout_width="wrap_content"
+        android:layout_height="62dp"
+        android:fontFamily="@font/kopubworlddotummedium"
+        android:gravity="center"
+        android:text="오늘의 기분"
+        android:paddingRight="20dp" />
+
+        <ImageButton
+            android:id="@+id/mindButton"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:backgroundTint="#20000000"
+            app:srcCompat="@drawable/baseline_question_mark_24"
+            tools:ignore="SpeakableTextPresentCheck"/>
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/paint"
         android:layout_width="360dp"
         android:layout_height="360dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="240dp"
+        android:padding="20dp"
         android:background="#FFFFFF"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
+        android:layout_gravity="center"></ImageView>
+
+
 
     <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/kopubworlddotummedium"
-        android:text="제목"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/paint"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/titleEdit"
-        android:layout_width="180dp"
+        android:layout_margin="20dp"
+        android:id="@+id/writeTextView"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="16dp"
         android:ems="10"
         android:fontFamily="@font/nanumjunghaksaeng"
-        android:inputType="text"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/paint"
-        app:layout_constraintStart_toEndOf="@+id/titleText"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:enabled="false"
-        />
+        android:background="#ffffff"
+        android:text="내용 입력" />
 
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/mindText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/kopubworlddotummedium"
-        android:text="오늘의 기분"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/paint" />
-
-    <ImageButton
-        android:id="@+id/menuButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/menu"
-        tools:ignore="SpeakableTextPresentCheck"/>
-
-    <TextView
-        android:id="@+id/diaryDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="24dp"
-        android:text="2023년 7월 1일"
-        app:layout_constraintEnd_toStartOf="@+id/menuButton"
-        app:layout_constraintStart_toEndOf="@+id/backButton"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/angry"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mindText"
-        app:srcCompat="@drawable/angry"
-        tools:ignore="SpeakableTextPresentCheck"/>
-
-    <ImageButton
-        android:id="@+id/sad"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/angry"
-        app:layout_constraintTop_toBottomOf="@+id/mindText"
-        app:srcCompat="@drawable/sad"
-        tools:ignore="SpeakableTextPresentCheck"/>
-
-    <ImageButton
-        android:id="@+id/happy"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintStart_toEndOf="@+id/sad"
-        app:layout_constraintTop_toBottomOf="@+id/mindText"
-        app:srcCompat="@drawable/happy"
-        tools:ignore="SpeakableTextPresentCheck"/>
-
-    <ImageButton
-        android:id="@+id/soso"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintStart_toEndOf="@+id/happy"
-        app:layout_constraintTop_toBottomOf="@+id/mindText"
-        app:srcCompat="@drawable/soso"
-        tools:ignore="SpeakableTextPresentCheck"/>
-
-    <ImageButton
-        android:id="@+id/imageButton7"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="28dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/soso"
-        app:layout_constraintTop_toBottomOf="@+id/mindText"
-        app:srcCompat="@drawable/delight"
-        tools:ignore="SpeakableTextPresentCheck"/>
-
-    <TextView
-        android:id="@+id/writeTextView"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/happy" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
