@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 
@@ -12,6 +13,8 @@ class PaintingDiaryActivity : AppCompatActivity() {
 
     lateinit var titleText : EditText
     lateinit var writeText : EditText
+    lateinit var paintingDiaryBackButton: ImageButton
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +31,7 @@ class PaintingDiaryActivity : AppCompatActivity() {
 
         titleText = findViewById(R.id.titleEdit)
         writeText = findViewById(R.id.writeEdit)
+        paintingDiaryBackButton = findViewById(R.id.paintingdiarybackButton)
 
 
         diaryDate.setText(year + "년 " + month + "월 " + date + "일")
@@ -35,6 +39,11 @@ class PaintingDiaryActivity : AppCompatActivity() {
 
         paint.setOnClickListener {
             val intent = Intent(this, PaintingActivity::class.java)
+            startActivity(intent)
+        }
+
+        paintingDiaryBackButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
