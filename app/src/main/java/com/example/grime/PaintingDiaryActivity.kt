@@ -24,6 +24,7 @@ class PaintingDiaryActivity : AppCompatActivity() {
     lateinit var date : String
     lateinit var paint : ImageView
     lateinit var mindButton : ImageButton
+    lateinit var writeTextView : TextView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +35,7 @@ class PaintingDiaryActivity : AppCompatActivity() {
 
         var diaryDate = findViewById<TextView>(R.id.diaryDate)
         paint = findViewById<ImageView>(R.id.paint)
-        var writingTextView = findViewById<TextView>(R.id.writeTextView)
+        writeTextView = findViewById<TextView>(R.id.writeTextView)
         mindButton = findViewById(R.id.mindButton)
 
         year = intent.getIntExtra("year", 0).toString()
@@ -51,14 +52,16 @@ class PaintingDiaryActivity : AppCompatActivity() {
             startActivityForResult(intent, 1)
         }
 
-        writingTextView.setOnClickListener {
-            val intent = Intent(this, WritingActivity::class.java)
-            intent.putExtra("file", year + "_" + month + "_" + date + "_content" + ".txt");
-        }
         mindButton.setOnClickListener {
             val intent = Intent(this, MindActivity::class.java)
             intent.putExtra("file", year + "_" + month + "_" + date + "_mind" + ".txt");
             startActivityForResult(intent, 2)
+        }
+
+        writeTextView.setOnClickListener {
+            val intent = Intent(this, WritingActivity::class.java)
+            intent.putExtra("file", year + "_" + month + "_" + date + "_content" + ".txt");
+            startActivityForResult(intent, 3)
         }
 
     }
@@ -98,6 +101,25 @@ class PaintingDiaryActivity : AppCompatActivity() {
                         mindButton.setImageResource(R.drawable.soso)
                     else if(mind == "delight")
                         mindButton.setImageResource(R.drawable.delight)
+                }
+            }
+            else if(requestCode == 3) {
+                val fileName = year + "_" + month + "_" + date + "_content" + ".txt"
+                var content = ""
+
+                try {
+                    val buffer = BufferedReader(FileReader(cacheDir.path + "/" + fileName))
+                    while (true) {
+                        val line = buffer.readLine()
+                        if(line == null)
+                            break
+                        else
+                            content += line
+                    }
+                } catch(e : Exception) {
+                    Log.e("error", "error: " +  e.message)
+                } finally {
+                    writeTextView.setText(content.toString())
                 }
             }
         }
