@@ -28,6 +28,7 @@ class PaintingDiaryActivity : AppCompatActivity() {
 
         var diaryDate = findViewById<TextView>(R.id.diaryDate)
         paint = findViewById<ImageView>(R.id.paint)
+        var writingTextView = findViewById<TextView>(R.id.writeTextView)
 
         year = intent.getIntExtra("year", 0).toString()
         month = intent.getIntExtra("month", 0).toString()
@@ -41,6 +42,12 @@ class PaintingDiaryActivity : AppCompatActivity() {
             val intent = Intent(this, PaintingActivity::class.java)
             intent.putExtra("file", year + "_" + month + "_" + date + ".png");
             startActivityForResult(intent, 1)
+        }
+
+        writingTextView.setOnClickListener {
+            val intent = Intent(this, WritingActivity::class.java)
+            intent.putExtra("file", year + "_" + month + "_" + date + "_content" + ".txt");
+            startActivityForResult(intent, 2)
         }
 
     }

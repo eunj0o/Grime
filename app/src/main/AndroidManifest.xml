@@ -29,6 +29,9 @@
             android:name=".PaintingActivity"
             android:exported="false" />
         <activity
+            android:name=".WritingActivity"
+            android:exported="false" />
+        <activity
             android:name=".PaintingDiaryActivity"
             android:exported="false" />
         <activity
