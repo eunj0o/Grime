@@ -2,55 +2,59 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/paintingdiarylayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DDF0F6"
-    tools:context=".PaintingDiary">
+    tools:context=".PaintingDiaryActivity">
 
 
-    <ImageView
+    <LinearLayout
         android:id="@+id/paint"
         android:layout_width="360dp"
         android:layout_height="360dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="240dp"
+        android:layout_marginBottom="280dp"
         android:background="#FFFFFF"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.363"></LinearLayout>
 
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/kopubworlddotummedium"
         android:text="제목"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/paint"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paintingdiarybackButton" />
 
     <EditText
         android:id="@+id/titleEdit"
         android:layout_width="180dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="16dp"
         android:ems="10"
         android:fontFamily="@font/nanumjunghaksaeng"
         android:inputType="text"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/paint"
         app:layout_constraintStart_toEndOf="@+id/titleText"
+        app:layout_constraintTop_toBottomOf="@+id/paintingdiarybackButton"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
-        android:id="@+id/backButton"
+        android:id="@+id/paintingdiarybackButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -82,7 +86,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/writeEdit"
@@ -109,7 +113,7 @@
         android:layout_marginEnd="24dp"
         android:text="2023년 7월 1일"
         app:layout_constraintEnd_toStartOf="@+id/menuButton"
-        app:layout_constraintStart_toEndOf="@+id/backButton"
+        app:layout_constraintStart_toEndOf="@+id/paintingdiarybackButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
@@ -122,7 +126,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mindText"
         app:srcCompat="@drawable/angry"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/sad"
@@ -133,7 +137,7 @@
         app:layout_constraintStart_toEndOf="@+id/angry"
         app:layout_constraintTop_toBottomOf="@+id/mindText"
         app:srcCompat="@drawable/sad"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/happy"
@@ -145,7 +149,7 @@
         app:layout_constraintStart_toEndOf="@+id/sad"
         app:layout_constraintTop_toBottomOf="@+id/mindText"
         app:srcCompat="@drawable/happy"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/soso"
@@ -157,7 +161,7 @@
         app:layout_constraintStart_toEndOf="@+id/happy"
         app:layout_constraintTop_toBottomOf="@+id/mindText"
         app:srcCompat="@drawable/soso"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/imageButton7"
@@ -171,6 +175,6 @@
         app:layout_constraintStart_toEndOf="@+id/soso"
         app:layout_constraintTop_toBottomOf="@+id/mindText"
         app:srcCompat="@drawable/delight"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

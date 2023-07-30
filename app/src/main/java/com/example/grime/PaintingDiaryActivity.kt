@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +20,9 @@ class PaintingDiaryActivity : AppCompatActivity() {
     lateinit var month : String
     lateinit var date : String
     lateinit var paint : ImageView
+    lateinit var titleText : EditText
+    lateinit var writeText : EditText
+    lateinit var paintingDiaryBackButton: ImageButton
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +38,10 @@ class PaintingDiaryActivity : AppCompatActivity() {
         month = intent.getIntExtra("month", 0).toString()
         date = intent.getIntExtra("date", 0).toString()
 
+        titleText = findViewById(R.id.titleEdit)
+        writeText = findViewById(R.id.writeEdit)
+        paintingDiaryBackButton = findViewById(R.id.paintingdiarybackButton)
+
 
         diaryDate.setText(year + "년 " + month + "월 " + date + "일")
 
@@ -41,6 +50,11 @@ class PaintingDiaryActivity : AppCompatActivity() {
             val intent = Intent(this, PaintingActivity::class.java)
             intent.putExtra("file", year + "_" + month + "_" + date + ".png");
             startActivityForResult(intent, 1)
+        }
+
+        paintingDiaryBackButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
     }
