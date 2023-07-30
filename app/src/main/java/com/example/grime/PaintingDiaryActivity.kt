@@ -66,9 +66,10 @@ class PaintingDiaryActivity : AppCompatActivity() {
                 val bitmap = BitmapFactory.decodeFile(cacheDir.path + "/" + fileName)
                 paint.setImageBitmap(bitmap)
             }
-            else if(resultCode == 2) {
+            else if(requestCode == 2) {
                 val fileName = year + "_" + month + "_" + date + "_mind" + ".txt"
                 var mind = ""
+
                 try {
                     val buffer = BufferedReader(FileReader(cacheDir.path + "/" + fileName))
                     while (true) {

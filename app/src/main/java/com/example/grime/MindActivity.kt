@@ -33,62 +33,69 @@ class MindActivity : AppCompatActivity() {
         angryButton.setOnClickListener {
             val intent = Intent()
             try {
-                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName))
+                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName, false))
                 buffer.append("angry")
                 buffer.close()
             } catch (e: Exception) {
                 Log.e("error", "error: " + e.message)
+            } finally {
+                setResult(RESULT_OK, intent)
+                finish()
             }
-            setResult(RESULT_OK, intent)
-            finish()
+
         }
         sadButton.setOnClickListener {
             val intent = Intent()
             try {
-                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName))
+                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName, false))
                 buffer.append("sad")
                 buffer.close()
             } catch (e: Exception) {
                 Log.e("error", "error: " + e.message)
+            } finally {
+                setResult(RESULT_OK, intent)
+                finish()
             }
-            setResult(RESULT_OK, intent)
-            finish()
+
         }
         happyButton.setOnClickListener {
             val intent = Intent()
             try {
-                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName))
+                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName, false))
                 buffer.append("happy")
                 buffer.close()
             } catch (e: Exception) {
                 Log.e("error", "error: " + e.message)
+            } finally {
+                setResult(RESULT_OK, intent)
+                finish()
             }
-            setResult(RESULT_OK, intent)
-            finish()
         }
         sosoButton.setOnClickListener {
             val intent = Intent()
             try {
-                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName))
+                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName, false))
                 buffer.append("soso")
                 buffer.close()
             } catch (e: Exception) {
                 Log.e("error", "error: " + e.message)
+            } finally {
+                setResult(RESULT_OK, intent)
+                finish()
             }
-            setResult(RESULT_OK, intent)
-            finish()
         }
         delightButton.setOnClickListener {
             val intent = Intent()
             try {
-                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName))
+                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName, false))
                 buffer.append("delight")
                 buffer.close()
             } catch (e: Exception) {
                 Log.e("error", "error: " + e.message)
+            } finally {
+                setResult(RESULT_OK, intent)
+                finish()
             }
-            setResult(RESULT_OK, intent)
-            finish()
         }
     }
 }
