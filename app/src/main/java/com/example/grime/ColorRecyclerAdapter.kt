@@ -35,7 +35,7 @@ class ColorRecyclerAdapter(list: ArrayList<ColorRecyclerItem>) :
             colorItem = itemView.findViewById<View>(R.id.colorItem)
             checkItem = itemView.findViewById<ImageView>(R.id.checkItem)
 
-            colorItem.setOnClickListener {
+            itemView.setOnClickListener {
 
                 var color = 0
                 val position: Int = adapterPosition
@@ -72,8 +72,6 @@ class ColorRecyclerAdapter(list: ArrayList<ColorRecyclerItem>) :
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view: View =
             inflater.inflate(R.layout.activity_color_item, parent, false)
-
-        val viewHolder: ViewHolder = ViewHolder(view)
 
         return ViewHolder(view)
     }
