@@ -8,7 +8,7 @@
     tools:context=".PaintingDiary">
 
 
-    <LinearLayout
+    <ImageView
         android:id="@+id/paint"
         android:layout_width="360dp"
         android:layout_height="360dp"
@@ -21,7 +21,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
 
     <TextView
         android:id="@+id/titleText"
