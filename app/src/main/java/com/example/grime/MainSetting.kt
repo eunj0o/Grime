@@ -10,6 +10,7 @@ class MainSetting : AppCompatActivity() {
     lateinit var FontChangeButton: ImageButton
     lateinit var ColorChangeButton: ImageButton
     lateinit var TrashCanButton: ImageButton
+    lateinit var SettingBackButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,5 +35,12 @@ class MainSetting : AppCompatActivity() {
             var intent = Intent(this, TrashCan::class.java)
             startActivity(intent)
         }
+
+        SettingBackButton.setOnClickListener {
+            var intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
 }
