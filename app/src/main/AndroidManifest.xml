@@ -13,11 +13,15 @@
         android:theme="@style/Theme.Grime"
         tools:targetApi="31">
         <activity
+            android:name=".CalendarActivity"
+            android:exported="false" />
+        <activity
             android:name=".MindActivity"
             android:exported="false" />
         <activity
             android:name=".EraserActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog"/>
         <activity
             android:name=".EmptyDiaryActivity"
             android:exported="false" />
