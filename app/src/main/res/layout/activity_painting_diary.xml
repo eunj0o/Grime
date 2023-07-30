@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/paintingdiarylayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DDF0F6"
-    tools:context=".PaintingDiary">
+    tools:context=".PaintingDiaryActivity">
 
 
     <LinearLayout
@@ -82,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/writeEdit"
@@ -122,7 +123,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mindText"
         app:srcCompat="@drawable/angry"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/sad"
@@ -133,7 +134,7 @@
         app:layout_constraintStart_toEndOf="@+id/angry"
         app:layout_constraintTop_toBottomOf="@+id/mindText"
         app:srcCompat="@drawable/sad"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/happy"
@@ -145,7 +146,7 @@
         app:layout_constraintStart_toEndOf="@+id/sad"
         app:layout_constraintTop_toBottomOf="@+id/mindText"
         app:srcCompat="@drawable/happy"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/soso"
@@ -157,7 +158,7 @@
         app:layout_constraintStart_toEndOf="@+id/happy"
         app:layout_constraintTop_toBottomOf="@+id/mindText"
         app:srcCompat="@drawable/soso"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/imageButton7"
@@ -171,6 +172,6 @@
         app:layout_constraintStart_toEndOf="@+id/soso"
         app:layout_constraintTop_toBottomOf="@+id/mindText"
         app:srcCompat="@drawable/delight"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

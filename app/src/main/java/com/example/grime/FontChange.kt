@@ -34,8 +34,8 @@ class FontChange : AppCompatActivity() {
         }
 
 
-        val titleText = PaintingDiary().titleText
-        val writeText = PaintingDiary().writeText
+        val titleText = PaintingDiaryActivity().titleText
+        val writeText = PaintingDiaryActivity().writeText
 
 
 
