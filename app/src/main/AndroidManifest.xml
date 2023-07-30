@@ -25,6 +25,15 @@
             android:name=".MainSetting"
             android:exported="false" />
         <activity
+            android:name=".MindActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EraserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EmptyDiaryActivity"
+            android:exported="false" />
+        <activity
             android:name=".Painting"
             android:exported="false" />
         <activity
@@ -33,6 +42,9 @@
             android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
         <activity
             android:name=".PaintingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WritingActivity"
             android:exported="false" />
         <activity
             android:name=".PaintingDiaryActivity"

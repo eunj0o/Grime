@@ -33,6 +33,7 @@ class PenActivity : AppCompatActivity() {
         val intent = intent
         var color = intent.getIntExtra("color", Color.parseColor("#00ffffff"))
         var width = intent.getFloatExtra("width", 0f)
+
         widthBar.progress = width.toInt()
         widthText.setText(width.toInt().toString())
         var strColor = convertColorToStr(color)
