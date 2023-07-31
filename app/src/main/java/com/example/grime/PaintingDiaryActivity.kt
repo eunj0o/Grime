@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -48,8 +49,18 @@ class PaintingDiaryActivity : AppCompatActivity() {
         ThemeUtil.applyTheme(sharedPreferences, theme)
         setContentView(R.layout.activity_painting_diary)
 
+
         var mainLayout = findViewById<ViewGroup>(R.id.mainLayout)
         ThemeUtil.applyViewStyle(sharedPreferences, mainLayout)
+
+
+        //메뉴 버튼 누르면 아래에서 나옴
+        val menubutton = findViewById<ImageButton>(R.id.menuButton)
+        menubutton.setOnClickListener {
+            val bottommenu = bottommenu()
+            bottommenu.show(supportFragmentManager, bottommenu.tag)
+        }
+
 
         val intent = intent
         var diaryDate = findViewById<TextView>(R.id.diaryDate)
@@ -74,10 +85,13 @@ class PaintingDiaryActivity : AppCompatActivity() {
             startActivityForResult(intent, 1)
         }
 
+
+        //뒤로가기 버튼
         paintingDiaryBackButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
 
         mindButton.setOnClickListener {
             val intent = Intent(this, MindActivity::class.java)
@@ -90,6 +104,7 @@ class PaintingDiaryActivity : AppCompatActivity() {
             intent.putExtra("date", year + "_" + month + "_" + date);
             startActivityForResult(intent, 3)
         }
+
 
     }
 
