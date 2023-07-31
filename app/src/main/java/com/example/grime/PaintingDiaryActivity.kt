@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
@@ -65,7 +66,7 @@ class PaintingDiaryActivity : AppCompatActivity() {
 
         mindButton.setOnClickListener {
             val intent = Intent(this, MindActivity::class.java)
-            intent.putExtra("file", year + "_" + month + "_" + date + "_mind" + ".txt");
+            intent.putExtra("date", year + "_" + month + "_" + date);
             startActivityForResult(intent, 2)
         }
 
@@ -86,33 +87,21 @@ class PaintingDiaryActivity : AppCompatActivity() {
                 paint.setImageBitmap(bitmap)
             }
             else if(requestCode == 2) {
-                val fileName = year + "_" + month + "_" + date + "_mind" + ".txt"
-                var mind = ""
-
-                try {
-                    val buffer = BufferedReader(FileReader(cacheDir.path + "/" + fileName))
-                    while (true) {
-                        val line = buffer.readLine()
-                        if(line == null)
-                            break
-                        else
-                            mind += line
-                    }
-                } catch(e : Exception) {
-                    Log.e("error", "error: " +  e.message)
-                } finally {
-                    Log.i("test", "기분: " + mind)
-                    if(mind == "angry")
-                        mindButton.setImageResource(R.drawable.angry)
-                    else if(mind == "sad")
-                        mindButton.setImageResource(R.drawable.sad)
-                    else if(mind == "happy")
-                        mindButton.setImageResource(R.drawable.happy)
-                    else if(mind == "soso")
-                        mindButton.setImageResource(R.drawable.soso)
-                    else if(mind == "delight")
-                        mindButton.setImageResource(R.drawable.delight)
-                }
+                val key = year + "_" + month + "_" + date
+                val file = cacheDir.path + "/" + "mind.json"
+                val loaedFile = FileUtil.LoadFile(file)
+                val json = JSONObject(loaedFile)
+                val mind = json.getString(key)
+                if(mind == "angry")
+                    mindButton.setImageResource(R.drawable.angry)
+                else if(mind == "sad")
+                    mindButton.setImageResource(R.drawable.sad)
+                else if(mind == "happy")
+                    mindButton.setImageResource(R.drawable.happy)
+                else if(mind == "soso")
+                    mindButton.setImageResource(R.drawable.soso)
+                else if(mind == "delight")
+                    mindButton.setImageResource(R.drawable.delight)
             }
             else if(requestCode == 3) {
                 val fileName = year + "_" + month + "_" + date + "_content" + ".txt"

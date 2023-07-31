@@ -1,10 +1,12 @@
 package com.example.grime
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
+import org.json.JSONObject
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
@@ -22,7 +24,7 @@ class MindActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mind)
 
-        val fileName = intent.getStringExtra("file")
+        val date = intent.getStringExtra("date")
 
         angryButton = findViewById(R.id.angry)
         sadButton = findViewById(R.id.sad)
@@ -32,70 +34,73 @@ class MindActivity : AppCompatActivity() {
 
         angryButton.setOnClickListener {
             val intent = Intent()
-            try {
-                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName, false))
-                buffer.append("angry")
-                buffer.close()
-            } catch (e: Exception) {
-                Log.e("error", "error: " + e.message)
-            } finally {
-                setResult(RESULT_OK, intent)
-                finish()
-            }
-
+            val file = cacheDir.path + "/" + "mind.json"
+            val loadedData = FileUtil.LoadFile(file)
+            var json : JSONObject
+            if(loadedData != null)
+                json = JSONObject(loadedData)
+            else
+                json = JSONObject()
+            json.put(date, "angry")
+            FileUtil.SaveFile(file, json.toString())
+            setResult(RESULT_OK, intent)
+            finish()
         }
         sadButton.setOnClickListener {
             val intent = Intent()
-            try {
-                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName, false))
-                buffer.append("sad")
-                buffer.close()
-            } catch (e: Exception) {
-                Log.e("error", "error: " + e.message)
-            } finally {
-                setResult(RESULT_OK, intent)
-                finish()
-            }
-
+            val file = cacheDir.path + "/" + "mind.json"
+            val loadedData = FileUtil.LoadFile(file)
+            var json : JSONObject
+            if(loadedData != null)
+                json = JSONObject(loadedData)
+            else
+                json = JSONObject()
+            json.put(date, "sad")
+            FileUtil.SaveFile(file, json.toString())
+            setResult(RESULT_OK, intent)
+            finish()
         }
         happyButton.setOnClickListener {
             val intent = Intent()
-            try {
-                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName, false))
-                buffer.append("happy")
-                buffer.close()
-            } catch (e: Exception) {
-                Log.e("error", "error: " + e.message)
-            } finally {
-                setResult(RESULT_OK, intent)
-                finish()
-            }
+            val file = cacheDir.path + "/" + "mind.json"
+            val loadedData = FileUtil.LoadFile(file)
+            var json : JSONObject
+            if(loadedData != null)
+                json = JSONObject(loadedData)
+            else
+                json = JSONObject()
+            json.put(date, "happy")
+            FileUtil.SaveFile(file, json.toString())
+            setResult(RESULT_OK, intent)
+            finish()
         }
         sosoButton.setOnClickListener {
             val intent = Intent()
-            try {
-                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName, false))
-                buffer.append("soso")
-                buffer.close()
-            } catch (e: Exception) {
-                Log.e("error", "error: " + e.message)
-            } finally {
-                setResult(RESULT_OK, intent)
-                finish()
-            }
+            val file = cacheDir.path + "/" + "mind.json"
+            val loadedData = FileUtil.LoadFile(file)
+            var json : JSONObject
+            if(loadedData != null)
+                json = JSONObject(loadedData)
+            else
+                json = JSONObject()
+            json.put(date, "soso")
+            FileUtil.SaveFile(file, json.toString())
+            setResult(RESULT_OK, intent)
+            finish()
         }
         delightButton.setOnClickListener {
             val intent = Intent()
-            try {
-                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName, false))
-                buffer.append("delight")
-                buffer.close()
-            } catch (e: Exception) {
-                Log.e("error", "error: " + e.message)
-            } finally {
-                setResult(RESULT_OK, intent)
-                finish()
-            }
+            val file = cacheDir.path + "/" + "mind.json"
+            val loadedData = FileUtil.LoadFile(file)
+            var json : JSONObject
+            if(loadedData != null)
+                json = JSONObject(loadedData)
+            else
+                json = JSONObject()
+            json.put(date, "delight")
+            FileUtil.SaveFile(file, json.toString())
+            setResult(RESULT_OK, intent)
+            finish()
         }
     }
 }
