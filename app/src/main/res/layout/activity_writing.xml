@@ -15,14 +15,14 @@
 
         <EditText
             android:id="@+id/edtext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/edt_writing"
+            android:hint="글 작성하기"
             android:inputType="textMultiLine"
             android:lines="30"
             android:maxLines="100"
-            android:hint="일기 내용 적기"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars = "vertical"
-            android:background="@drawable/edt_writing" />
+            android:scrollbars="vertical" />
 
     </ScrollView>
 
@@ -30,6 +30,10 @@
         android:id="@+id/edtButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="확인" />
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="#FDFFB1"
+        android:text="글쓰기 완료"
+        android:textColor="#000000" />
 
 </LinearLayout>
