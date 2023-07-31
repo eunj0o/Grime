@@ -11,37 +11,52 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/kopubworlddotummedium"
         android:orientation="horizontal"
-        android:padding="10dp">
-    <ImageButton
-        android:id="@+id/paintingdiarybackButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:backgroundTint="#00FFFFFF"
-        app:srcCompat="@drawable/back"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:padding="10dp"
+        android:text="제목"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/paint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paintingdiarybackButton">
+
+
+        <ImageButton
+            android:id="@+id/paintingdiarybackButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:backgroundTint="#00FFFFFF"
+            app:srcCompat="@drawable/back"
+            tools:ignore="SpeakableTextPresentCheck" />
+
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
+
         <TextView
             android:id="@+id/diaryDate"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:text="2023년 7월 1일"
- />
+            android:text="2023년 7월 1일" />
+
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    <ImageButton
-        android:id="@+id/menuButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:backgroundTint="#00FFFFFF"
-        app:srcCompat="@drawable/menu"
-        tools:ignore="SpeakableTextPresentCheck"/>
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/menuButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:backgroundTint="#00FFFFFF"
+            app:srcCompat="@drawable/menu"
+            tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,6 +82,7 @@
             android:textSize="16sp"
             tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
