@@ -299,17 +299,10 @@ class PaintingActivity : AppCompatActivity() {
             val tempFile = File(storage, fileName)
 
             try {
-
-                // 자동으로 빈 파일을 생성합니다.
                 tempFile.createNewFile()
-
-                // 파일을 쓸 수 있는 스트림을 준비합니다.
                 val out = FileOutputStream(tempFile)
 
-                // compress 함수를 사용해 스트림에 비트맵을 저장합니다.
                 view.bitmapResult?.compress(Bitmap.CompressFormat.PNG, 100, out)
-
-                // 스트림 사용후 닫아줍니다.
                 out.close()
                 Log.i("test", fileName + " success save")
             } catch (e: FileNotFoundException) {

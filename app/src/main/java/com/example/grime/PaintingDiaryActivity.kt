@@ -3,8 +3,10 @@ package com.example.grime
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
@@ -13,13 +15,18 @@ import android.widget.ImageView
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.File
+import java.io.FileOutputStream
 import java.io.FileReader
 import java.lang.Exception
 import java.nio.Buffer
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
+import kotlin.io.path.Path
 
 
 class PaintingDiaryActivity : AppCompatActivity() {
@@ -56,7 +63,7 @@ class PaintingDiaryActivity : AppCompatActivity() {
 
         titleEdit = findViewById(R.id.titleEdit)
         paintingDiaryBackButton = findViewById(R.id.paintingdiarybackButton)
-
+        loadCache()
 
         diaryDate.setText(year + "년 " + month + "월 " + date + "일")
 
@@ -80,7 +87,7 @@ class PaintingDiaryActivity : AppCompatActivity() {
 
         writeTextView.setOnClickListener {
             val intent = Intent(this, WritingActivity::class.java)
-            intent.putExtra("file", year + "_" + month + "_" + date + "_content" + ".txt");
+            intent.putExtra("date", year + "_" + month + "_" + date);
             startActivityForResult(intent, 3)
         }
 
@@ -90,46 +97,99 @@ class PaintingDiaryActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
-                val fileName = year + "_" + month + "_" + date + ".png"
-                val bitmap = BitmapFactory.decodeFile(cacheDir.path + "/" + fileName)
-                paint.setImageBitmap(bitmap)
+                loadCachePainting()
             }
             else if(requestCode == 2) {
-                val key = year + "_" + month + "_" + date
-                val file = cacheDir.path + "/" + "mind.json"
-                val loaedFile = FileUtil.LoadFile(file)
-                val json = JSONObject(loaedFile)
-                val mind = json.getString(key)
-                if(mind == "angry")
-                    mindButton.setImageResource(R.drawable.angry)
-                else if(mind == "sad")
-                    mindButton.setImageResource(R.drawable.sad)
-                else if(mind == "happy")
-                    mindButton.setImageResource(R.drawable.happy)
-                else if(mind == "soso")
-                    mindButton.setImageResource(R.drawable.soso)
-                else if(mind == "delight")
-                    mindButton.setImageResource(R.drawable.delight)
+                loadCacheMind()
             }
             else if(requestCode == 3) {
-                val fileName = year + "_" + month + "_" + date + "_content" + ".txt"
-                var content = ""
-
-                try {
-                    val buffer = BufferedReader(FileReader(cacheDir.path + "/" + fileName))
-                    while (true) {
-                        val line = buffer.readLine()
-                        if(line == null)
-                            break
-                        else
-                            content += line
-                    }
-                } catch(e : Exception) {
-                    Log.e("error", "error: " +  e.message)
-                } finally {
-                    writeTextView.setText(content.toString())
-                }
+                loadCacheContent()
             }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun save() {
+        savePainting()
+        saveMind()
+        saveContent()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun savePainting() {
+        try {
+            val fileName = year + "_" + month + "_" + date + ".png"
+            Files.move(Path(cacheDir.path + "/" + fileName), Path(filesDir.path + "/" + fileName), StandardCopyOption.REPLACE_EXISTING)
+        } catch (e: Exception) {
+            Log.e("error", "error: " + e.message)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun saveMind() {
+        try {
+            val fileName = year + "_" + month + "_" + date + "_mind.json"
+            Files.move(Path(cacheDir.path + "/" + fileName), Path(filesDir.path + "/" + fileName), StandardCopyOption.REPLACE_EXISTING)
+        } catch (e: Exception) {
+            Log.e("error", "error: " + e.message)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun saveContent() {
+        try {
+            val fileName = year + "_" + month + "_" + date + "_cntent.txt"
+            Files.move(Path(cacheDir.path + "/" + fileName), Path(filesDir.path + "/" + fileName), StandardCopyOption.REPLACE_EXISTING)
+        } catch (e: Exception) {
+            Log.e("error", "error: " + e.message)
+        }
+    }
+
+    fun loadCache() {
+        loadCachePainting()
+        loadCacheMind()
+        loadCacheContent()
+    }
+
+    fun loadCachePainting() {
+        try {
+            val fileName = year + "_" + month + "_" + date + ".png"
+         val bitmap = BitmapFactory.decodeFile(cacheDir.path + "/" + fileName)
+          paint.setImageBitmap(bitmap)
+        } catch (e: Exception) {
+            Log.e("error", "error: " + e.message)
+        }
+    }
+
+    fun loadCacheMind() {
+        try {
+            val key = year + "_" + month + "_" + date
+            val file = cacheDir.path + "/" + "mind.json"
+            val loaedFile = FileUtil.LoadFile(file)
+            val json = JSONObject(loaedFile)
+            val mind = json.getString(key)
+            if (mind == "angry")
+                mindButton.setImageResource(R.drawable.angry)
+            else if (mind == "sad")
+                mindButton.setImageResource(R.drawable.sad)
+            else if (mind == "happy")
+                mindButton.setImageResource(R.drawable.happy)
+            else if (mind == "soso")
+                mindButton.setImageResource(R.drawable.soso)
+            else if (mind == "delight")
+                mindButton.setImageResource(R.drawable.delight)
+        } catch (e: Exception) {
+            Log.e("error", "error: " + e.message)
+        }
+    }
+
+    fun loadCacheContent() {
+        try {
+            val file = cacheDir.path + "/" + year + "_" + month + "_" + date + "_content" + ".txt"
+            val loaedFile = FileUtil.LoadFile(file)
+            writeTextView.setText(loaedFile)
+        } catch (e: Exception) {
+            Log.e("error", "error: " + e.message)
         }
     }
 }
