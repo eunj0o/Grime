@@ -19,7 +19,7 @@ class FileUtil {
                     if (line == null)
                         break
                     else
-                        content += line
+                        content += line + "\n"
                 }
                 return content
             } catch (e: Exception) {
