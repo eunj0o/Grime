@@ -1,12 +1,17 @@
 package com.example.grime
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.core.content.res.ResourcesCompat
 
 class FontChange : AppCompatActivity() {
@@ -17,9 +22,15 @@ class FontChange : AppCompatActivity() {
     lateinit var font3Button: ImageButton
     lateinit var writing: EditText
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
+        ThemeUtil.applyTheme(sharedPreferences, theme)
         setContentView(R.layout.activity_font_change)
+
+        var mainLayout = findViewById<ViewGroup>(R.id.mainLayout)
+        ThemeUtil.applyViewStyle(sharedPreferences, mainLayout)
 
         BackButton = findViewById(R.id.fontchangeback)
         font1Button = findViewById(R.id.font1Button)
@@ -33,31 +44,29 @@ class FontChange : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-        val titleText = PaintingDiaryActivity().titleText
-        val writeText = PaintingDiaryActivity().writeText
-
-
-
-        //폰트 가져오기
-        val nanumjunghaksaeng: Typeface? = ResourcesCompat.getFont(this, R.font.nanumjunghaksaeng)
-        val nanumneurisneuris: Typeface? = ResourcesCompat.getFont(this, R.font.nanumneurisneuris)
-        val nanumjarhagoisseo: Typeface? = ResourcesCompat.getFont(this, R.font.nanumjarhagoisseo)
-
         //폰트 변경 버튼 누르면 폰트 변경
         font1Button.setOnClickListener {
-            titleText.typeface = nanumjunghaksaeng
-            writeText.typeface = nanumjunghaksaeng
+            val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+
+            editor.putInt("font", R.style.nanumjunghaksaeng)
+            editor.apply()
         }
 
         font2Button.setOnClickListener {
-            titleText.typeface = nanumneurisneuris
-            writeText.typeface = nanumneurisneuris
+            val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+
+            editor.putInt("font", R.style.nanumneurisneuris)
+            editor.apply()
         }
 
         font3Button.setOnClickListener {
-            titleText.typeface = nanumjarhagoisseo
-            writeText.typeface = nanumjarhagoisseo
+            val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+
+            editor.putInt("font", R.style.nanumjarhagoisseo)
+            editor.apply()
         }
 
     }

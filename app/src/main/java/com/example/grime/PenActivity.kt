@@ -1,5 +1,6 @@
 package com.example.grime
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -20,6 +21,8 @@ class PenActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
+        ThemeUtil.applyTheme(sharedPreferences, theme)
         setContentView(R.layout.activity_pen)
 
 

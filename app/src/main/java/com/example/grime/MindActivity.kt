@@ -22,6 +22,8 @@ class MindActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
+        ThemeUtil.applyTheme(sharedPreferences, theme)
         setContentView(R.layout.activity_mind)
 
         val date = intent.getStringExtra("date")

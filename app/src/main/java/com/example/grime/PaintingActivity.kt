@@ -16,6 +16,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -247,7 +248,12 @@ lateinit var view : PaintingView
 class PaintingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
+        ThemeUtil.applyTheme(sharedPreferences, theme)
         setContentView(R.layout.activity_painting)
+
+        var mainLayout = findViewById<ViewGroup>(R.id.mainLayout)
+        ThemeUtil.applyViewStyle(sharedPreferences, mainLayout)
 
         val intent = intent
         val fileName = intent.getStringExtra("file")

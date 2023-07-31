@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="nanumjunghaksaeng">
+        <item name="fontFamily">@font/nanumjunghaksaeng</item>
+
+    </style>
+    <style name="nanumneurisneuris">
+        <item name="fontFamily">@font/nanumneurisneuris</item>
+    </style>
+
+    <style name="nanumjarhagoisseo">
+        <item name="fontFamily">@font/nanumjarhagoisseo</item>
+    </style>
+
+</resources>

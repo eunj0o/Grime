@@ -1,10 +1,13 @@
 package com.example.grime
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.EditText
@@ -33,10 +36,15 @@ class PaintingDiaryActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
+
+        ThemeUtil.applyTheme(sharedPreferences, theme)
         setContentView(R.layout.activity_painting_diary)
 
-        val intent = intent
+        var mainLayout = findViewById<ViewGroup>(R.id.mainLayout)
+        ThemeUtil.applyViewStyle(sharedPreferences, mainLayout)
 
+        val intent = intent
         var diaryDate = findViewById<TextView>(R.id.diaryDate)
         paint = findViewById<ImageView>(R.id.paint)
         writeTextView = findViewById<TextView>(R.id.writeTextView)
