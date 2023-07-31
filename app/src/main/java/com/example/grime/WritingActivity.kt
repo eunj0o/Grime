@@ -33,21 +33,16 @@ class WritingActivity : AppCompatActivity() {
         var edtButton = findViewById<Button>(R.id.edtButton)
         var edtext = findViewById<EditText>(R.id.edtext)
 
-        val fileName = intent.getStringExtra("file")
+        val date = intent.getStringExtra("date")
+
+        edtext.setText(FileUtil.LoadFile(cacheDir.path + "/" + date + "_content.txt"))
 
         edtButton.setOnClickListener {
             val intent = Intent()
-            try {
-                val buffer = BufferedWriter(FileWriter(cacheDir.path + "/" + fileName, false))
-                buffer.append(edtext.text)
-                buffer.close()
-            } catch (e: Exception) {
-                Log.e("error", "error: " + e.message)
-            } finally {
-                setResult(RESULT_OK, intent)
-                finish()
-            }
-
+            val file = cacheDir.path + "/" + date + "_content.txt"
+            FileUtil.SaveFile(file, edtext.text.toString())
+            setResult(RESULT_OK, intent)
+            finish()
         }
 
 
