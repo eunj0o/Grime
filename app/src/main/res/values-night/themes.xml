@@ -3,5 +3,8 @@
     <style name="Base.Theme.Grime" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+
+        //상단바 색상 변경
+        <item name="android:statusBarColor" >#FDFFB1</item>
     </style>
 </resources>
