@@ -669,13 +669,18 @@ class PaintingDiaryActivity : AppCompatActivity(), bottommenu.OnDataPassListener
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onDataPass(data: String?) {
-        if(data == "imageSave") {
-            val fileName = year + "_" + month + "_" + date + ".png"
-            val bitmap = BitmapFactory.decodeFile(filesDir.path + "/" + fileName)
-            saveImageOnAboveAndroidQ(bitmap)
-            Toast.makeText(this, "PICTURES/Grime에 저장이 완료되었습니다", Toast.LENGTH_SHORT).show()
-        } else if(data == "shareImage") {
-            shareImage()
+        if(editStatus == false) {
+            if (data == "imageSave") {
+
+                val fileName = year + "_" + month + "_" + date + ".png"
+                val bitmap = BitmapFactory.decodeFile(filesDir.path + "/" + fileName)
+                saveImageOnAboveAndroidQ(bitmap)
+                Toast.makeText(this, "PICTURES/Grime에 저장이 완료되었습니다", Toast.LENGTH_SHORT).show()
+            } else if (data == "shareImage") {
+                shareImage()
+            }
+        } else {
+            Toast.makeText(this, "먼저 일기 저장을 완료해주세요", Toast.LENGTH_SHORT).show()
         }
     }
 }
