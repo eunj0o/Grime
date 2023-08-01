@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var calendar : Calendar
     lateinit var yearCalendar : TextView
     lateinit var monthCalendar : TextView
-    lateinit var previousButton : Button
-    lateinit var nextButton: Button
+    lateinit var previousButton : ImageButton
+    lateinit var nextButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
