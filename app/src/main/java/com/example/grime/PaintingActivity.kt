@@ -281,7 +281,7 @@ class PaintingActivity : AppCompatActivity() {
         paintingbackButton.setOnClickListener {
             var intent = Intent(this, PaintingDiaryActivity::class.java)
             setResult(RESULT_OK, intent)
-            startActivity(intent)
+            finish()
         }
 
         view = PaintingView(this, cacheDir.path + "/" + date + ".png")
