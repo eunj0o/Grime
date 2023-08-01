@@ -12,28 +12,28 @@
         android:background="#DDF0F6">
 
         <Button
-            android:id="@+id/deletebutton"
+            android:id="@+id/tempbutton"
             android:layout_width="360dp"
             android:layout_height="60dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="#FFFFFF"
             android:fontFamily="@font/kopubworlddotummedium"
-            android:text="일기장 삭제"
+            android:text="임시 버튼"
             android:textColor="#020202"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editbutton" />
+            app:layout_constraintTop_toBottomOf="@+id/sharebutton" />
 
         <Button
-            android:id="@+id/editbutton"
+            android:id="@+id/sharebutton"
             android:layout_width="360dp"
             android:layout_height="60dp"
             android:layout_marginTop="8dp"
             android:backgroundTint="#FFFFFF"
             android:fontFamily="@font/kopubworlddotummedium"
-            android:text="일기장 수정"
+            android:text="그림 공유"
             android:textColor="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.509"

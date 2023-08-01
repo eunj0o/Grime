@@ -25,10 +25,7 @@
         android:orientation="horizontal"
         android:padding="10dp"
         android:text="제목"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/paint"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/paintingdiarybackButton">
+        android:textSize="16sp">
 
 
         <ImageButton
@@ -91,13 +88,18 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
     <TextView
         android:id="@+id/mindText"
         android:layout_width="wrap_content"
@@ -114,6 +116,36 @@
             android:backgroundTint="#20000000"
             app:srcCompat="@drawable/baseline_question_mark_24"
             tools:ignore="SpeakableTextPresentCheck"/>
+        </LinearLayout>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </Space>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="62dp"
+            android:id="@+id/saveButton"
+            android:text="저장" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="62dp"
+            android:id="@+id/editButton"
+            android:text="수정"
+            android:visibility="gone"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="62dp"
+            android:id="@+id/deleteButton"
+            android:text="삭제"
+            android:visibility="gone"/>
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -135,7 +167,7 @@
         android:inputType="textMultiLine"
         android:fontFamily="@font/nanumjunghaksaeng"
         android:background="#ffffff"
-        android:text="내용 입력" />
+        android:hint="내용 입력" />
     </LinearLayout>
 </ScrollView>
 </LinearLayout>

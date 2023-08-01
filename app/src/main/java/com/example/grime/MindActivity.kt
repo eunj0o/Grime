@@ -19,6 +19,7 @@ class MindActivity : AppCompatActivity() {
     lateinit var happyButton: ImageButton
     lateinit var sosoButton: ImageButton
     lateinit var delightButton: ImageButton
+    lateinit var date : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +27,7 @@ class MindActivity : AppCompatActivity() {
         ThemeUtil.applyTheme(sharedPreferences, theme)
         setContentView(R.layout.activity_mind)
 
-        val date = intent.getStringExtra("date")
+        date = intent.getStringExtra("date")!!
 
         angryButton = findViewById(R.id.angry)
         sadButton = findViewById(R.id.sad)
@@ -45,6 +46,7 @@ class MindActivity : AppCompatActivity() {
                 json = JSONObject()
             json.put(date, "angry")
             FileUtil.SaveFile(file, json.toString())
+            saveStatus()
             setResult(RESULT_OK, intent)
             finish()
         }
@@ -59,6 +61,7 @@ class MindActivity : AppCompatActivity() {
                 json = JSONObject()
             json.put(date, "sad")
             FileUtil.SaveFile(file, json.toString())
+            saveStatus()
             setResult(RESULT_OK, intent)
             finish()
         }
@@ -73,6 +76,7 @@ class MindActivity : AppCompatActivity() {
                 json = JSONObject()
             json.put(date, "happy")
             FileUtil.SaveFile(file, json.toString())
+            saveStatus()
             setResult(RESULT_OK, intent)
             finish()
         }
@@ -87,6 +91,7 @@ class MindActivity : AppCompatActivity() {
                 json = JSONObject()
             json.put(date, "soso")
             FileUtil.SaveFile(file, json.toString())
+            saveStatus()
             setResult(RESULT_OK, intent)
             finish()
         }
@@ -101,8 +106,30 @@ class MindActivity : AppCompatActivity() {
                 json = JSONObject()
             json.put(date, "delight")
             FileUtil.SaveFile(file, json.toString())
+            saveStatus()
             setResult(RESULT_OK, intent)
             finish()
         }
+    }
+
+    fun saveStatus() {
+        val file = filesDir.path + "/" + "status.json"
+        val loadedData = FileUtil.LoadFile(file)
+        var json : JSONObject
+        if(loadedData != null)
+            json = JSONObject(loadedData)
+        else
+            json = JSONObject()
+        try {
+            if (json.getString(date) == "completed" || json.getString(date) == "editing")
+                json.put(date, "editing")
+            else
+                json.put(date, "temp")
+        } catch(e: Exception) {
+            json.put(date, "temp")
+        } finally {
+            FileUtil.SaveFile(file, json.toString())
+        }
+        FileUtil.SaveFile(file, json.toString())
     }
 }

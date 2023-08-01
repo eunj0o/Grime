@@ -21,6 +21,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import org.json.JSONObject
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -33,7 +34,7 @@ class PaintingView(context: Context, fileDir: String) : View(context) {
         setLayerType(LAYER_TYPE_HARDWARE, null)
     }
     enum class Mode {
-        MOVE, PEN, ERASER
+        PEN, ERASER
     }
     var paint : Paint = Paint().apply {
         color = Color.BLACK
@@ -58,7 +59,7 @@ class PaintingView(context: Context, fileDir: String) : View(context) {
     var isEraserMoving : Boolean = false
     var eraserPosX : Float = 0f
     var eraserPosY : Float = 0f
-    var mode : Mode = Mode.MOVE
+    var mode : Mode = Mode.PEN
     var path : Path = Path()
     var bitmap : Bitmap? = null
     var bitmapResult : Bitmap? = null
@@ -82,13 +83,14 @@ class PaintingView(context: Context, fileDir: String) : View(context) {
         super.onSizeChanged(w, h, oldw, oldh)
         bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
         bitmapResult = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+
         bitmap?.let {
             canvas = Canvas(it)
         }
         bitmapResult?.let {
             canvasResult = Canvas(it)
         }
-
+        canvasResult.drawColor(Color.parseColor("#FFFFFF"))
         loadBitmap()
     }
 
@@ -200,6 +202,7 @@ class PaintingView(context: Context, fileDir: String) : View(context) {
         for(l in lines) {
             canvasResult.drawPath(l.path, l.paint)
         }
+        bitmapResult?.setHasAlpha(true);
     }
 
     fun loadBitmap() {
@@ -238,14 +241,12 @@ class PaintingView(context: Context, fileDir: String) : View(context) {
     fun isPen() : Boolean {
         return mode == Mode.PEN
     }
-
-    fun isMove() : Boolean {
-        return mode == Mode.MOVE
-    }
 }
 lateinit var view : PaintingView
 
 class PaintingActivity : AppCompatActivity() {
+
+    lateinit var date : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
@@ -256,7 +257,7 @@ class PaintingActivity : AppCompatActivity() {
         ThemeUtil.applyViewStyle(sharedPreferences, mainLayout)
 
         val intent = intent
-        val fileName = intent.getStringExtra("file")
+        date = intent.getStringExtra("date")!!
 
 
         var layout = findViewById<LinearLayout>(R.id.paint)
@@ -266,8 +267,7 @@ class PaintingActivity : AppCompatActivity() {
         var eraserButton = findViewById<ImageButton>(R.id.eraser)
         var completeButton = findViewById<Button>(R.id.completeButton)
 
-        view = fileName?.let { PaintingView(this, cacheDir.path + "/" + it) }!!
-
+        view = PaintingView(this, cacheDir.path + "/" + date + ".png")
 
 
         undoButton.setOnClickListener { view.undo() }
@@ -296,7 +296,7 @@ class PaintingActivity : AppCompatActivity() {
             view.saveBitmap()
             val storage = cacheDir
 
-            val tempFile = File(storage, fileName)
+            val tempFile = File(storage, date + ".png")
 
             try {
                 tempFile.createNewFile()
@@ -304,12 +304,13 @@ class PaintingActivity : AppCompatActivity() {
 
                 view.bitmapResult?.compress(Bitmap.CompressFormat.PNG, 100, out)
                 out.close()
-                Log.i("test", fileName + " success save")
+                Log.i("test", date + ".png" + " success save")
             } catch (e: FileNotFoundException) {
                 Log.e("MyTag", "FileNotFoundException : " + e.message)
             } catch (e: IOException) {
                 Log.e("MyTag", "IOException : " + e.message)
             } finally {
+                saveStatus()
                 setResult(RESULT_OK, intent)
                 finish()
             }
@@ -342,5 +343,26 @@ class PaintingActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    fun saveStatus() {
+        val file = filesDir.path + "/" + "status.json"
+        val loadedData = FileUtil.LoadFile(file)
+        var json : JSONObject
+        if(loadedData != null)
+            json = JSONObject(loadedData)
+        else
+            json = JSONObject()
+        try {
+            if (json.getString(date) == "completed" || json.getString(date) == "editing")
+                json.put(date, "editing")
+            else
+                json.put(date, "temp")
+        } catch(e: Exception) {
+            json.put(date, "temp")
+        } finally {
+            FileUtil.SaveFile(file, json.toString())
+        }
+        FileUtil.SaveFile(file, json.toString())
     }
 }
