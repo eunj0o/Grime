@@ -21,7 +21,7 @@
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             tools:itemCount="7"
-            tools:listitem="@layout/item_calendar_day_of_week" />
+            tools:listitem="@layout/week_item" />
 
         <!-- 커스텀 캘린더뷰 -->
         <androidx.recyclerview.widget.RecyclerView
@@ -32,6 +32,6 @@
             android:numColumns="7"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             tools:itemCount="31"
-            tools:listitem="@layout/item_calendar_gridview" />
+            tools:listitem="@layout/date_item" />
 
 </LinearLayout>

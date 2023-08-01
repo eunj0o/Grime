@@ -1,9 +1,11 @@
 package com.example.grime
 
 import android.graphics.Bitmap
+import android.view.View
 
 class CalendarRecyclerItem {
     var date : Int = 1
-    var isDiary : Boolean = false       // 일기 작성 여부
-    var image : Bitmap? = null
+    var paintImage : Bitmap? = null
+    var visibility : Int = View.GONE
+    var tint : Int = 0
 }
