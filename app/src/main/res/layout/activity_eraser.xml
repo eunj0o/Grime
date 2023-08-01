@@ -5,6 +5,7 @@
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:id="@+id/mainLayout"
     android:background="#FDFFB1"
     android:orientation="vertical"
     tools:context=".EraserActivity">
