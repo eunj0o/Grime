@@ -48,6 +48,7 @@ class PaintingDiaryActivity : AppCompatActivity(), bottommenu.OnDataPassListener
     lateinit var saveButton : Button
     lateinit var editButton : Button
     lateinit var deleteButton : Button
+    lateinit var moreButton : Button
     var status : String = "new"
     var editStatus : Boolean = true
     lateinit var loadStatus : ArrayList<Boolean>
@@ -83,6 +84,7 @@ class PaintingDiaryActivity : AppCompatActivity(), bottommenu.OnDataPassListener
         saveButton = findViewById<Button>(R.id.saveButton)
         editButton = findViewById<Button>(R.id.editButton)
         deleteButton = findViewById<Button>(R.id.deleteButton)
+        moreButton = findViewById(R.id.moreView)
 
         year = intent.getIntExtra("year", 0).toString()
         month = intent.getIntExtra("month", 0).toString()
@@ -102,6 +104,10 @@ class PaintingDiaryActivity : AppCompatActivity(), bottommenu.OnDataPassListener
             saveButton.visibility = View.GONE
             editButton.visibility = View.VISIBLE
             deleteButton.visibility = View.VISIBLE
+            val text = writeTextView.text.toString()
+            val line = text.split("\n").size
+            if(line > 3)
+                moreButton.visibility = View.VISIBLE
             titleEdit.isEnabled = false
         }
 
@@ -123,6 +129,16 @@ class PaintingDiaryActivity : AppCompatActivity(), bottommenu.OnDataPassListener
 
             }
         })
+
+        moreButton.setOnClickListener {
+            val text = writeTextView.text.toString()
+            val line = text.split("\n").size
+
+            if(line > 3)
+                writeTextView.layoutParams.height = (line * (writeTextView.textSize + 5)).toInt()
+            moreButton.visibility = View.GONE
+
+        }
 
         paint.setOnClickListener {
             if(editStatus == true) {
@@ -154,6 +170,10 @@ class PaintingDiaryActivity : AppCompatActivity(), bottommenu.OnDataPassListener
             deleteButton.visibility = View.VISIBLE
             saveButton.visibility = View.GONE
             editStatus = false
+            val text = writeTextView.text.toString()
+            val line = text.split("\n").size
+            if(line > 3)
+                moreButton.visibility = View.VISIBLE
         }
 
         editButton.setOnClickListener {
@@ -162,6 +182,8 @@ class PaintingDiaryActivity : AppCompatActivity(), bottommenu.OnDataPassListener
             saveButton.visibility = View.VISIBLE
             editButton.visibility = View.GONE
             deleteButton.visibility = View.GONE
+            moreButton.visibility = View.GONE
+            writeTextView.layoutParams.height = (writeTextView.textSize * 2.5).toInt()
         }
 
         deleteButton.setOnClickListener {

@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="@font/kopubworlddotummedium"
         android:gravity="center"
         android:orientation="horizontal"
@@ -162,12 +162,23 @@
         android:layout_margin="20dp"
         android:id="@+id/writeTextView"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
         android:ems="10"
         android:inputType="textMultiLine"
         android:fontFamily="@font/nanumjunghaksaeng"
         android:background="#ffffff"
-        android:hint="내용 입력" />
+        android:hint="내용 입력"
+        android:textSize="20dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="더보기"
+            android:id="@+id/moreView"
+            android:visibility="gone"
+            android:layout_gravity="right">
+
+        </Button>
     </LinearLayout>
 </ScrollView>
 </LinearLayout>
