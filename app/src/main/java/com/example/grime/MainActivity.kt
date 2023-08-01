@@ -84,15 +84,9 @@ class MainActivity : AppCompatActivity() {
             var year = calendar.get(Calendar.YEAR)
             var month = calendar.get(Calendar.MONTH)
             var day = calendar.get(Calendar.DATE)
-            
-            // 해당 달이 1월인지에 따라 다르게 적용
-            if(month + 1 > 1) {
-                calendar.set(year, month - 1, day)
 
-            }
-            else {
-                calendar.set(year - 1, 12, day)
-            }
+            calendar.set(year, month - 1, day)
+
             yearCalendar.setText((calendar.get(Calendar.YEAR)).toString())
             monthCalendar.setText((calendar.get(Calendar.MONTH) + 1).toString())
             initCalendarAdapter()
@@ -103,13 +97,8 @@ class MainActivity : AppCompatActivity() {
             var month = calendar.get(Calendar.MONTH)
             var day = calendar.get(Calendar.DATE)
 
-            // 해당 달이 12월인지에 따라 다르게 적용
-            if(month + 1 < 12) {
-                calendar.set(year, month + 1, day)
-            }
-            else {
-                calendar.set(year + 1, 1, day)
-            }
+            calendar.set(year, month + 1, day)
+
             yearCalendar.setText((calendar.get(Calendar.YEAR)).toString())
             monthCalendar.setText((calendar.get(Calendar.MONTH) + 1).toString())
             initCalendarAdapter()
