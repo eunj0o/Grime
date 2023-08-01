@@ -40,7 +40,7 @@ class ColorRecyclerAdapter(list: ArrayList<ColorRecyclerItem>) :
                 var color = 0
                 val position: Int = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-
+                    // 색깔 지정하면 체크 표시하고, 나머지 아이템은 체크 표시 해제
                     val item: ColorRecyclerItem = list[position]
                     color = item.color
                     for(i in 0..checkList.size - 1)
@@ -62,7 +62,6 @@ class ColorRecyclerAdapter(list: ArrayList<ColorRecyclerItem>) :
             this.checkList.add(false)
     }
 
-    // 아이템 뷰를 위한 뷰홀더 객체를 생성하여 리턴
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -76,14 +75,13 @@ class ColorRecyclerAdapter(list: ArrayList<ColorRecyclerItem>) :
         return ViewHolder(view)
     }
 
-    // position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item: ColorRecyclerItem = list[position]
         holder.colorItem.setBackgroundColor(item.color)
         if(checkList[position])
-            holder.checkItem.visibility = View.VISIBLE
+            holder.checkItem.visibility = View.VISIBLE          // 체크가 true이면 체크 표시 on
         else
-            holder.checkItem.visibility = View.GONE
+            holder.checkItem.visibility = View.GONE             // 체크가 false이면 체크 표시 off
     }
 
     override fun getItemCount(): Int {

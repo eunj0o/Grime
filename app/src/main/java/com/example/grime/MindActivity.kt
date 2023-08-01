@@ -23,8 +23,11 @@ class MindActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // 폰트 적용
         val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
         ThemeUtil.applyTheme(sharedPreferences, theme)
+        
         setContentView(R.layout.activity_mind)
 
         date = intent.getStringExtra("date")!!
@@ -35,6 +38,7 @@ class MindActivity : AppCompatActivity() {
         sosoButton = findViewById(R.id.soso)
         delightButton = findViewById(R.id.delight)
 
+        // 버튼 누를 시 각 감정에 맞게 캐시 파일로 임시 저장
         angryButton.setOnClickListener {
             val intent = Intent()
             val file = cacheDir.path + "/" + "mind.json"
@@ -112,6 +116,7 @@ class MindActivity : AppCompatActivity() {
         }
     }
 
+    // 해당 날짜의 일기 상태를 저장
     fun saveStatus() {
         val file = filesDir.path + "/" + "status.json"
         val loadedData = FileUtil.LoadFile(file)
@@ -121,8 +126,10 @@ class MindActivity : AppCompatActivity() {
         else
             json = JSONObject()
         try {
+            // 기존 일기의 상태가 작성 완료나 수정 중일 때, 수정 중으로 저장
             if (json.getString(date) == "completed" || json.getString(date) == "editing")
                 json.put(date, "editing")
+            // 기존 일기의 상태가 위의 상태가 아닐 시 임시 저장으로 저장
             else
                 json.put(date, "temp")
         } catch(e: Exception) {

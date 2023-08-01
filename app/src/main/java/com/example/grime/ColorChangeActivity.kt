@@ -7,28 +7,29 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 
-class ColorChange : AppCompatActivity() {
+class ColorChangeActivity : AppCompatActivity() {
 
-    lateinit var BackButton: ImageButton
+    lateinit var backButton: ImageButton
     lateinit var skyblueButton: ImageButton
     lateinit var butterButton: ImageButton
     lateinit var pinkButton: ImageButton
     lateinit var melonButton: ImageButton
-    lateinit var colorchangelayout: ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
+        
+        // 폰트 적용
         ThemeUtil.applyTheme(sharedPreferences, theme)
         setContentView(R.layout.activity_color_change)
-
+        
+        // 배경색 적용
         var mainLayout = findViewById<ViewGroup>(R.id.mainLayout)
         ThemeUtil.applyViewStyle(sharedPreferences, mainLayout)
 
-        BackButton = findViewById(R.id.colorchangeback)
+        backButton = findViewById(R.id.colorchangeback)
         skyblueButton = findViewById(R.id.skyblue)
         butterButton = findViewById(R.id.butter)
         pinkButton = findViewById(R.id.pink)
@@ -36,12 +37,12 @@ class ColorChange : AppCompatActivity() {
 
 
         //뒤로가기 버튼
-        BackButton.setOnClickListener {
+        backButton.setOnClickListener {
             var intent = Intent(this, MainSetting::class.java)
             startActivity(intent)
         }
 
-        //색 변경 버튼
+        // 하늘색으로 배경색 지정
          skyblueButton.setOnClickListener {
              val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
              val editor = sharedPreferences.edit()
@@ -50,6 +51,7 @@ class ColorChange : AppCompatActivity() {
              editor.apply()
          }
 
+        // 버터색으로 배경색 지정
         butterButton.setOnClickListener {
             val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
@@ -58,6 +60,7 @@ class ColorChange : AppCompatActivity() {
             editor.apply()
         }
 
+        // 핑크색으로 배경색 지정
         pinkButton.setOnClickListener {
             val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
@@ -66,6 +69,7 @@ class ColorChange : AppCompatActivity() {
             editor.apply()
         }
 
+        // 멜론색으로 배경색 지정
         melonButton.setOnClickListener {
             val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()

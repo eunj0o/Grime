@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DDF0F6"
-    tools:context=".Painting">
+    tools:context=".PaintingActivity">
 
     <LinearLayout
         android:id="@+id/paint"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
     <ImageButton
-        android:id="@+id/paintbackButton"
+        android:id="@+id/paintBackButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"

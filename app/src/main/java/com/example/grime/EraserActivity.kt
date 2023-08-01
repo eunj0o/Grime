@@ -14,26 +14,30 @@ import android.widget.TextView
 class EraserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // 폰트 적용
         val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
         ThemeUtil.applyTheme(sharedPreferences, theme)
         setContentView(R.layout.activity_eraser)
-
-        val intent = intent
+        
+        // 배경색 적용
         var mainLayout = findViewById<ViewGroup>(R.id.mainLayout)
         ThemeUtil.applyViewStyle(sharedPreferences, mainLayout)
-        var size = intent.getFloatExtra("size", 0f)
+
+        val intent = intent
+        var size = intent.getFloatExtra("size", 0f)     // 지우개 크기 받아오기
 
         var sizeBar = findViewById<SeekBar>(R.id.size)
         var sizeText = findViewById<TextView>(R.id.sizeText)
         var saveButton = findViewById<Button>(R.id.save)
 
-        sizeBar.progress = size.toInt()
-        sizeText.setText(size.toInt().toString())
+        sizeBar.progress = size.toInt()             // 현재 지우개 크기 SeekBar에 적용
+        sizeText.setText(size.toInt().toString())   // 현재 크기 텍스트 출력
 
         sizeBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (seekBar != null) {
-                    sizeText.setText(seekBar.progress.toString())
+                    sizeText.setText(seekBar.progress.toString())       // 변경 중 텍스트에 적용
                 }
                 // Implement any logic you need when progress changes
             }
@@ -44,7 +48,7 @@ class EraserActivity : AppCompatActivity() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 if (seekBar != null) {
-                    sizeText.setText(seekBar.progress.toString())
+                    sizeText.setText(seekBar.progress.toString())         // 변경 후 텍스트에 적용
                 }
             }
         })

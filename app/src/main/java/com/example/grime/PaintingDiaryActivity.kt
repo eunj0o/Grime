@@ -49,20 +49,21 @@ class PaintingDiaryActivity : AppCompatActivity(), bottommenu.OnDataPassListener
     lateinit var editButton : Button
     lateinit var deleteButton : Button
     lateinit var moreButton : Button
-    var status : String = "new"
-    var editStatus : Boolean = true
-    lateinit var loadStatus : ArrayList<Boolean>
+    var status : String = "new"             // 일기 상태
+    var editStatus : Boolean = true         // 편집 가능 상태를 나타내기 위한 상태
+    lateinit var loadStatus : ArrayList<Boolean>        // 캐시 파일 로딩 여부를 나타내기 위한 상태 리스트
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // 폰트 적용
         val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
-
         ThemeUtil.applyTheme(sharedPreferences, theme)
+        
         setContentView(R.layout.activity_painting_diary)
 
-
+        // 배경색 적용
         var mainLayout = findViewById<ViewGroup>(R.id.mainLayout)
         ThemeUtil.applyViewStyle(sharedPreferences, mainLayout)
 
@@ -95,10 +96,11 @@ class PaintingDiaryActivity : AppCompatActivity(), bottommenu.OnDataPassListener
         loadStatus = ArrayList<Boolean>()
         for(i in 1..4)
             loadStatus.add(false)
+        
+        // 캐시 우선 적용 후 캐시 파일이 없으면 내부 저장소 파일 로딩
         loadCache()
         load()
-
-        Log.i("i", "status: " + status)
+        
         editStatus = status == "editing" || status == "temp" || status == "new"
         if(!editStatus) {
             saveButton.visibility = View.GONE
@@ -226,31 +228,25 @@ class PaintingDiaryActivity : AppCompatActivity(), bottommenu.OnDataPassListener
     private fun saveImageOnAboveAndroidQ(bitmap: Bitmap) : String {
         val fileName = System.currentTimeMillis().toString() + ".png" // 파일이름 현재시간.png
 
-        /*
-        * ContentValues() 객체 생성.
-        * ContentValues는 ContentResolver가 처리할 수 있는 값을 저장해둘 목적으로 사용된다.
-        * */
         val contentValues = ContentValues()
         contentValues.apply {
-            put(MediaStore.Images.Media.RELATIVE_PATH, "PICTURES/Grime") // 경로 설정
-            put(MediaStore.Images.Media.DISPLAY_NAME, fileName) // 파일이름을 put해준다.
+            put(MediaStore.Images.Media.RELATIVE_PATH, "PICTURES/Grime")
+            put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
             put(MediaStore.Images.Media.MIME_TYPE, "image/png")
-            put(MediaStore.Images.Media.IS_PENDING, 1) // 현재 is_pending 상태임을 만들어준다.
-            // 다른 곳에서 이 데이터를 요구하면 무시하라는 의미로, 해당 저장소를 독점할 수 있다.
+            put(MediaStore.Images.Media.IS_PENDING, 1)
         }
 
-        // 이미지를 저장할 uri를 미리 설정해놓는다.
+        // 이미지를 저장할 uri를 미리 설정
         val uri = contentResolver?.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
 
         try {
             if(uri != null) {
                 val image = contentResolver.openFileDescriptor(uri, "w", null)
-                // write 모드로 file을 open한다.
 
                 if(image != null) {
                     val fos = FileOutputStream(image.fileDescriptor)
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
-                    //비트맵을 FileOutputStream를 통해 compress한다.
+
                     fos.close()
 
                     contentValues.clear()

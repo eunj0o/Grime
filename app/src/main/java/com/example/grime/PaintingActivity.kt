@@ -31,6 +31,7 @@ import java.lang.Exception
 
 class PaintingView(context: Context, fileDir: String) : View(context) {
     init {
+        // 성능을 위한 하드웨어 모드 설정
         setLayerType(LAYER_TYPE_HARDWARE, null)
     }
     enum class Mode {
@@ -61,12 +62,12 @@ class PaintingView(context: Context, fileDir: String) : View(context) {
     var eraserPosY : Float = 0f
     var mode : Mode = Mode.PEN
     var path : Path = Path()
-    var bitmap : Bitmap? = null
-    var bitmapResult : Bitmap? = null
-    var lines : ArrayList<Line> = ArrayList<Line>()
+    var bitmap : Bitmap? = null             // 30획을 넘어가는 그림을 저장하기 위한 비트맵
+    var bitmapResult : Bitmap? = null       // 기존 비트맵과 30획을 합쳐서 표현할 비트맵
+    var lines : ArrayList<Line> = ArrayList<Line>()     // 되돌리기와 취소를 위한 획 리스트
     var canvas : Canvas = Canvas()
     var canvasResult : Canvas = Canvas()
-    var undoLines : ArrayList<Line> = ArrayList<Line>()
+    var undoLines : ArrayList<Line> = ArrayList<Line>()    // 되돌리기와 취소를 위한 취소 획 리스트
     val fileDir = fileDir
 
     class Line {
@@ -81,6 +82,7 @@ class PaintingView(context: Context, fileDir: String) : View(context) {
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
+
         bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
         bitmapResult = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
 
@@ -90,11 +92,13 @@ class PaintingView(context: Context, fileDir: String) : View(context) {
         bitmapResult?.let {
             canvasResult = Canvas(it)
         }
+        // default 배경색으로 하얀색 지정
         canvasResult.drawColor(Color.parseColor("#FFFFFF"))
         loadBitmap()
     }
 
     override fun onDraw(canvas: Canvas) {
+        // 기존 비트맵을 그리고 그 뒤에 되돌리기가 가능한 획들 추가
         bitmap?.let {
             canvas.drawBitmap(it, 0f, 0f, null)
         }
@@ -102,7 +106,9 @@ class PaintingView(context: Context, fileDir: String) : View(context) {
             canvas.drawPath(l.path, l.paint)
         }
         canvas.drawPath(path, paint)
-        if(isEraserMoving)
+        
+        // 지우개가 움직이고 있을 때, 지우개를 나타내는 원을 표시
+        if(isEraserMoving)  
             canvas.drawCircle(eraserPosX, eraserPosY, eraserSize, eraserPaint)
     }
 
@@ -196,6 +202,7 @@ class PaintingView(context: Context, fileDir: String) : View(context) {
     }
 
     fun saveBitmap() {
+        // 기존 비트맵에 30획의 path를 적용시킨 결과물 비트맵을 저장
         bitmap?.let {
             canvasResult.drawBitmap(it, 0f, 0f, null)
         }
@@ -247,12 +254,15 @@ lateinit var view : PaintingView
 class PaintingActivity : AppCompatActivity() {
 
     lateinit var date : String
+    lateinit var paintingbackButton: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // 폰트 적용
         val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
         ThemeUtil.applyTheme(sharedPreferences, theme)
         setContentView(R.layout.activity_painting)
 
+        // 배경색 적용
         var mainLayout = findViewById<ViewGroup>(R.id.mainLayout)
         ThemeUtil.applyViewStyle(sharedPreferences, mainLayout)
 
@@ -266,6 +276,13 @@ class PaintingActivity : AppCompatActivity() {
         var penButton = findViewById<ImageButton>(R.id.pen)
         var eraserButton = findViewById<ImageButton>(R.id.eraser)
         var completeButton = findViewById<Button>(R.id.completeButton)
+        paintingbackButton = findViewById(R.id.paintBackButton)
+
+        paintingbackButton.setOnClickListener {
+            var intent = Intent(this, PaintingDiaryActivity::class.java)
+            setResult(RESULT_OK, intent)
+            startActivity(intent)
+        }
 
         view = PaintingView(this, cacheDir.path + "/" + date + ".png")
 
@@ -304,7 +321,7 @@ class PaintingActivity : AppCompatActivity() {
 
                 view.bitmapResult?.compress(Bitmap.CompressFormat.PNG, 100, out)
                 out.close()
-                Log.i("test", date + ".png" + " success save")
+
             } catch (e: FileNotFoundException) {
                 Log.e("MyTag", "FileNotFoundException : " + e.message)
             } catch (e: IOException) {

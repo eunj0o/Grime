@@ -25,19 +25,16 @@
 
         </provider>
         <activity
-            android:name=".ColorChange"
+            android:name=".ColorChangeActivity"
             android:exported="false" />
         <activity
-            android:name=".FontChange"
+            android:name=".FontChangeActivity"
             android:exported="false" />
         <activity
             android:name=".TrashCan"
             android:exported="false" />
         <activity
             android:name=".MainSetting"
-            android:exported="false" />
-        <activity
-            android:name=".CalendarActivity"
             android:exported="false" />
         <activity
             android:name=".MindActivity"
@@ -47,12 +44,6 @@
             android:name=".EraserActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.Dialog"/>
-        <activity
-            android:name=".EmptyDiaryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Painting"
-            android:exported="false" />
         <activity
             android:name=".PenActivity"
             android:exported="false"

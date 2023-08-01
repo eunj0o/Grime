@@ -10,6 +10,7 @@ import java.lang.Exception
 
 class FileUtil {
     companion object {
+        // BufferedReader를 이용한 파일 로딩
         fun LoadFile(file: String): String? {
             var content = ""
             try {
@@ -28,6 +29,7 @@ class FileUtil {
             }
         }
 
+        // BufferedWriter를 이용한 파일 저장
         fun SaveFile(file: String, content: String) {
             try {
                 val buffer = BufferedWriter(FileWriter(file, false))

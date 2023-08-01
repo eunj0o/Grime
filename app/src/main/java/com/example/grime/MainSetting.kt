@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.LinearLayout
 
 class MainSetting : AppCompatActivity() {
 
@@ -17,10 +16,14 @@ class MainSetting : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // 폰트 적용
         val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
         ThemeUtil.applyTheme(sharedPreferences, theme)
+        
         setContentView(R.layout.activity_main_setting)
 
+        // 배경색 적용
         var mainLayout = findViewById<ViewGroup>(R.id.mainLayout)
         ThemeUtil.applyViewStyle(sharedPreferences, mainLayout)
 
@@ -31,12 +34,12 @@ class MainSetting : AppCompatActivity() {
 
 
         FontChangeButton.setOnClickListener {
-            var intent = Intent(this, FontChange::class.java)
+            var intent = Intent(this, FontChangeActivity::class.java)
             startActivity(intent)
         }
 
         ColorChangeButton.setOnClickListener {
-            var intent = Intent(this, ColorChange::class.java)
+            var intent = Intent(this, ColorChangeActivity::class.java)
             startActivity(intent)
         }
 

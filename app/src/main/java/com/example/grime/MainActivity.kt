@@ -33,33 +33,43 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // 폰트 적용
         val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
         ThemeUtil.applyTheme(sharedPreferences, theme)
         setContentView(R.layout.activity_main)
 
+        // 배경색 적용
+        var mainLayout = findViewById<ViewGroup>(R.id.mainLayout)
+        ThemeUtil.applyViewStyle(sharedPreferences, mainLayout)
+
+        // 현재 날짜 적용한 캘린더 Get
         calendar = getCalendar(savedInstanceState)!!
+        
         calendarRecycler = findViewById<RecyclerView>(R.id.dayList)
         weekRecycler = findViewById<RecyclerView>(R.id.weekList)
 
+        // 리사이클러뷰 layoutManager grid로 적용, 캐시 사이즈 적용
         val gridLayoutManager = GridLayoutManager(this, 7)
         calendarRecycler.layoutManager = gridLayoutManager
         calendarRecycler.setItemViewCacheSize(42)
 
+        // 리사이클러뷰 layoutManager grid로 적용, 캐시 사이즈 적용
         val gridLayoutManager_week = GridLayoutManager(this, 7)
         weekRecycler.layoutManager = gridLayoutManager_week
         weekRecycler.setItemViewCacheSize(7)
 
-        setWeeklistbar()
-        initCalendarAdapter()
 
-        var mainLayout = findViewById<ViewGroup>(R.id.mainLayout)
-        ThemeUtil.applyViewStyle(sharedPreferences, mainLayout)
+        setWeeklistbar()        // 요일을 나타내는 리스트 set
+        initCalendarAdapter()   // calendarAdapter init
+
 
         yearCalendar = findViewById(R.id.yearCalendar)
         monthCalendar = findViewById(R.id.monthCalendar)
         previousButton = findViewById(R.id.previous)
         nextButton = findViewById(R.id.next)
 
+        // 년과 달 default 적용
         yearCalendar.setText((calendar.get(Calendar.YEAR)).toString())
         monthCalendar.setText((calendar.get(Calendar.MONTH) + 1).toString())
 
@@ -74,6 +84,8 @@ class MainActivity : AppCompatActivity() {
             var year = calendar.get(Calendar.YEAR)
             var month = calendar.get(Calendar.MONTH)
             var day = calendar.get(Calendar.DATE)
+            
+            // 해당 달이 1월인지에 따라 다르게 적용
             if(month + 1 > 1) {
                 calendar.set(year, month - 1, day)
 
@@ -91,6 +103,7 @@ class MainActivity : AppCompatActivity() {
             var month = calendar.get(Calendar.MONTH)
             var day = calendar.get(Calendar.DATE)
 
+            // 해당 달이 12월인지에 따라 다르게 적용
             if(month + 1 < 12) {
                 calendar.set(year, month + 1, day)
             }
@@ -110,13 +123,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun getCalendar(savedInstanceState: Bundle?): Calendar? {
         calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR).toString()
-        val month = (calendar.get(Calendar.MONTH) + 1).toString()
-        val day = calendar.get(Calendar.DATE).toString()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH) + 1
 
-        if (savedInstanceState != null) {
-            calendar.set(savedInstanceState.getInt(year), savedInstanceState.getInt(month) - 1, 1)
-        } else calendar.set(Calendar.DAY_OF_MONTH, 1)
+        calendar.set(year, month - 1, 1)
+
         return calendar
     }
 
@@ -135,11 +146,9 @@ class MainActivity : AppCompatActivity() {
             }
         })
         calendarRecycler.adapter = calendarAdapter
-    //    rv_month.setAdapter(calendarAdapter)
     }
 
     private fun setWeeklistbar() {
-        //gridview_day_of_week에 요일 리스트 표시
         val dayOfWeekList = ArrayList<String>()
         dayOfWeekList.add("SUN")
         dayOfWeekList.add("MON")

@@ -21,11 +21,12 @@ class PenActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // 폰트 적용
         val sharedPreferences = getSharedPreferences("theme", Context.MODE_PRIVATE)
         ThemeUtil.applyTheme(sharedPreferences, theme)
+
         setContentView(R.layout.activity_pen)
-
-
 
         var widthBar = findViewById<SeekBar>(R.id.width)
         var widthText = findViewById<TextView>(R.id.widthText)
